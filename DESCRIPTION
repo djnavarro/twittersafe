@@ -21,6 +21,7 @@ Imports:
     cli,
     purrr,
     rtweet (>= 0.7.0.9000),
+    tibble,
     twitterapi (>= 0.0.0.9000)
 Remotes: 
     ropensci/rtweet,

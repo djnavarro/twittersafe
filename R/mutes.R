@@ -14,7 +14,8 @@ get_mutes <- function(token = NULL, n = 5000) {
   #params[[twitterapi::user_type(user)]] <- user
   resp <- twitterapi::TWIT_paginate_cursor(token, api, params, n = n)
   ids <- unlist(lapply(resp, function(x) x$ids))
-  return(ids)
+  users <- tibble::tibble(user_id = as.character(ids))
+  return(users)
 }
 
 
@@ -54,10 +55,10 @@ verbose_mute <- function(user) {
 
 #' Mute multiple users
 #'
-#' @param ids Numeric vector of user_ids
+#' @param users Tibble containing a user_ids column
 #'
 #' @return
 #' @export
-mute_users <- function(ids) {
-  purrr::walk(ids, verbose_mute)
+mute_users <- function(users) {
+  purrr::walk(as.numeric(users$user_id), verbose_mute)
 }
